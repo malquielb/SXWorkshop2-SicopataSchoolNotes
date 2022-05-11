@@ -8,11 +8,11 @@ namespace SicopataSchool.NotesManagement.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : ControllerBase
+    public class StudentsController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public StudentController(IMediator mediator)
+        public StudentsController(IMediator mediator)
         {
             _mediator = mediator;
         }

@@ -19,6 +19,8 @@ namespace SicopataSchool.NotesManagement.Persistence
                 options.UseSqlServer(configuration.GetConnectionString("SicopataSchoolConnectionString")));
             
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
+            services.AddScoped<INoteRepository, NoteRepository>();
         }
     }
 }

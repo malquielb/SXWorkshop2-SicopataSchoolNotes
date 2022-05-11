@@ -10,7 +10,7 @@ namespace SicopataSchool.NotesManagement.Persistence.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        private readonly SicopataSchoolDbContext _context;
+        protected readonly SicopataSchoolDbContext _context;
 
         public BaseRepository(SicopataSchoolDbContext context)
         {

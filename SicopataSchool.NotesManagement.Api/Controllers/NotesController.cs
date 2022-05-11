@@ -7,23 +7,24 @@ using SicopataSchool.NotesManagement.Application.Features.Notes.Commands.DeleteN
 using SicopataSchool.NotesManagement.Application.Features.Notes.Commands.UpdateNote;
 using SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetNoteDetails;
 using SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetNotesList;
+using SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetPublicNotes;
 
 namespace SicopataSchool.NotesManagement.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NoteController : ControllerBase
+    public class NotesController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public NoteController(IMediator mediator)
+        public NotesController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [EnableQuery()]
+        [EnableQuery(PageSize = 25)]
         public async Task<ActionResult<List<ListNoteVm>>> GetNoteList()
         {
             var response = await _mediator.Send(new GetNotesListQuery());
@@ -35,6 +36,16 @@ namespace SicopataSchool.NotesManagement.Api.Controllers
         public async Task<ActionResult<NoteDetailsVm>> GetNoteDetails(int id)
         {
             var response = await _mediator.Send(new GetNoteDetailsQuery() { Id = id });
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("public")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [EnableQuery(PageSize = 25)]
+        public async Task<ActionResult<List<PublicNoteVm>>> GetPublicNotes()
+        {
+            var response = await _mediator.Send(new GetPublicNotesQuery());
             return Ok(response);
         }
 
