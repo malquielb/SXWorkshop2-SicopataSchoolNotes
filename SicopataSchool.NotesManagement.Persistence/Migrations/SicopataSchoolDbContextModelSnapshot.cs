@@ -88,7 +88,7 @@ namespace SicopataSchool.NotesManagement.Persistence.Migrations
                     b.HasOne("SicopataSchool.NotesManagement.Domain.Entities.Student", "Student")
                         .WithMany("Notes")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Student");

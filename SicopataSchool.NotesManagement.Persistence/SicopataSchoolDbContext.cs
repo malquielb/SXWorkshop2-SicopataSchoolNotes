@@ -21,33 +21,34 @@ namespace SicopataSchool.NotesManagement.Persistence
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(SicopataSchoolDbContext).Assembly);
 
-            modelBuilder.Entity<Note>()
-                .HasKey(e => e.Id);
+            modelBuilder.Entity<Note>(note =>
+            {
+                note.HasKey(e => e.Id);
 
-            modelBuilder.Entity<Note>()
-                .Property(e => e.StudentId)
-                .IsRequired();
-            
-            modelBuilder.Entity<Note>()
-                .Property(e => e.Title)
-                .HasMaxLength(50);
-            
-            modelBuilder.Entity<Note>()
-                .Property(e => e.Body)
-                .HasMaxLength(250);
+                note.Property(e => e.StudentId)
+                    .IsRequired();
 
-            modelBuilder.Entity<Student>()
-                .HasKey(e => e.Id);
+                note.Property(e => e.Title)
+                    .HasMaxLength(50);
 
-            modelBuilder.Entity<Student>()
-                .Property(e => e.FirstName)
-                .HasMaxLength(125)
-                .IsRequired();
+                note.Property(e => e.Body)
+                    .HasMaxLength(250);
 
-            modelBuilder.Entity<Student>()
-                .Property(e => e.LastName)
-                .HasMaxLength(125)
-                .IsRequired();
+                note.HasOne(e => e.Student).WithMany(e => e.Notes).OnDelete(DeleteBehavior.ClientCascade);
+            });
+
+            modelBuilder.Entity<Student>(student =>
+            {
+                student.HasKey(e => e.Id);
+
+                student.Property(e => e.FirstName)
+                    .HasMaxLength(125)
+                    .IsRequired();
+                
+                student.Property(e => e.LastName)
+                    .HasMaxLength(125)
+                    .IsRequired();
+            });
         }
     }
 }

@@ -12,7 +12,7 @@ using SicopataSchool.NotesManagement.Persistence;
 namespace SicopataSchool.NotesManagement.Persistence.Migrations
 {
     [DbContext(typeof(SicopataSchoolDbContext))]
-    [Migration("20220511021012_InitialMigration")]
+    [Migration("20220511022950_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -90,7 +90,7 @@ namespace SicopataSchool.NotesManagement.Persistence.Migrations
                     b.HasOne("SicopataSchool.NotesManagement.Domain.Entities.Student", "Student")
                         .WithMany("Notes")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Student");

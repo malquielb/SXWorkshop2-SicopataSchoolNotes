@@ -44,8 +44,7 @@ namespace SicopataSchool.NotesManagement.Persistence.Migrations
                         name: "FK_Notes_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
