@@ -10,7 +10,7 @@ namespace SicopataSchool.NotesManagement.Application
 {
     public static class ApplicationServicesRegistration
     {
-        public static void AddApplicationServices(IServiceCollection services)
+        public static void AddApplicationServices(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
