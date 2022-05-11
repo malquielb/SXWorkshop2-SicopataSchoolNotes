@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SicopataSchool.NotesManagement.Application.Features.Notes.Commands.UpdateNote
 {
-    public class CreateNoteMappingProfile : Profile
+    public class UpdateNoteMappingProfile : Profile
     {
-        public CreateNoteMappingProfile()
+        public UpdateNoteMappingProfile()
         {
             CreateMap<UpdateNoteCommand, Note>();
         }

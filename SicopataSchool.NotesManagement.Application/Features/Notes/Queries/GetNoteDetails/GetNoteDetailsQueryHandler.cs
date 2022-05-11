@@ -15,7 +15,7 @@ namespace SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetN
         private readonly IAsyncRepository<Note> _asyncRepository;
         private readonly IMapper _mapper;
 
-        public GetNoteDetailsQueryHandler(Contracts.Persistence.IAsyncRepository<Note> asyncRepository, IMapper mapper)
+        public GetNoteDetailsQueryHandler(IAsyncRepository<Note> asyncRepository, IMapper mapper)
         {
             _asyncRepository = asyncRepository;
             _mapper = mapper;
