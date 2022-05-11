@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SicopataSchool.NotesManagement.Application.Contracts.Persistence
 {
-    public interface IAsyncRepository<T>
+    public interface IBaseRepository<T> where T : class
     {
-        Task<IQueryable<T>> ListAllAsync();
+        IQueryable<T> ListAll();
         Task<T> GetByIdAsync(int id);
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(T entity);
     }
 }

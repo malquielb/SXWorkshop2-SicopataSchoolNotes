@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using SicopataSchool.NotesManagement.Application.Contracts.Persistence;
+using SicopataSchool.NotesManagement.Application.Exceptions;
 using SicopataSchool.NotesManagement.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,18 +13,25 @@ namespace SicopataSchool.NotesManagement.Application.Features.Notes.Commands.Del
 {
     public class DeleteNoteCommandHandler : IRequestHandler<DeleteNoteCommand>
     {
-        private readonly IAsyncRepository<Note> _asyncRepository;
+        private readonly IBaseRepository<Note> _baseRepository;
         private readonly IMapper _mapper;
 
-        public DeleteNoteCommandHandler(IAsyncRepository<Note> asyncRepository, IMapper mapper)
+        public DeleteNoteCommandHandler(IBaseRepository<Note> baseRepository, IMapper mapper)
         {
-            _asyncRepository = asyncRepository;
+            _baseRepository = baseRepository;
             _mapper = mapper;
         }
 
         public async Task<Unit> Handle(DeleteNoteCommand request, CancellationToken cancellationToken)
         {
-            await _asyncRepository.DeleteAsync(request.Id);
+            var validator = new DeleteNoteCommandValidator();
+            var validationResult = await validator.ValidateAsync(request);
+
+            if (validationResult.Errors.Count > 0)
+                throw new ValidationException(validationResult);
+
+            var note = await _baseRepository.GetByIdAsync(request.Id);
+            await _baseRepository.DeleteAsync(note);
             return Unit.Value;
         }
     }

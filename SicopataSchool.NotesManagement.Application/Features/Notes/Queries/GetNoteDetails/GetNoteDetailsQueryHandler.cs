@@ -12,18 +12,18 @@ namespace SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetN
 {
     public class GetNoteDetailsQueryHandler : IRequestHandler<GetNoteDetailsQuery, NoteDetailsVm>
     {
-        private readonly IAsyncRepository<Note> _asyncRepository;
+        private readonly IBaseRepository<Note> _baseRepository;
         private readonly IMapper _mapper;
 
-        public GetNoteDetailsQueryHandler(IAsyncRepository<Note> asyncRepository, IMapper mapper)
+        public GetNoteDetailsQueryHandler(IBaseRepository<Note> baseRepository, IMapper mapper)
         {
-            _asyncRepository = asyncRepository;
+            _baseRepository = baseRepository;
             _mapper = mapper;
         }
 
         public async Task<NoteDetailsVm> Handle(GetNoteDetailsQuery request, CancellationToken cancellationToken)
         {
-            var note = await _asyncRepository.GetByIdAsync(request.Id);
+            var note = await _baseRepository.GetByIdAsync(request.Id);
             return _mapper.Map<NoteDetailsVm>(note);
         }
     }

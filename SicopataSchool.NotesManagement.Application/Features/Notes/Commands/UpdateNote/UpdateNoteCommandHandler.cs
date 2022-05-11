@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using SicopataSchool.NotesManagement.Application.Contracts.Persistence;
+using SicopataSchool.NotesManagement.Application.Exceptions;
 using SicopataSchool.NotesManagement.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,18 +13,24 @@ namespace SicopataSchool.NotesManagement.Application.Features.Notes.Commands.Upd
 {
     public class UpdateNoteCommandHandler : IRequestHandler<UpdateNoteCommand>
     {
-        private readonly IAsyncRepository<Note> _asyncRepository;
+        private readonly IBaseRepository<Note> _baseRepository;
         private readonly IMapper _mapper;
 
-        public UpdateNoteCommandHandler(IAsyncRepository<Note> asyncRepository, IMapper mapper)
+        public UpdateNoteCommandHandler(IBaseRepository<Note> baseRepository, IMapper mapper)
         {
-            _asyncRepository = asyncRepository;
+            _baseRepository = baseRepository;
             _mapper = mapper;
         }
 
         public async Task<Unit> Handle(UpdateNoteCommand request, CancellationToken cancellationToken)
         {
-            var noteToUpdate = await _asyncRepository.GetByIdAsync(request.Id);
+            var validator = new UpdateNoteCommandValidator();
+            var validationResult = await validator.ValidateAsync(request);
+
+            if (validationResult.Errors.Count > 0)
+                throw new ValidationException(validationResult);
+
+            var noteToUpdate = await _baseRepository.GetByIdAsync(request.Id);
             _mapper.Map(request, noteToUpdate, typeof(UpdateNoteCommand), typeof(Note));
             return Unit.Value;
         }
