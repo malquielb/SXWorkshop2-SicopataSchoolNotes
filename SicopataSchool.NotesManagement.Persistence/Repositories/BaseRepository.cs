@@ -35,9 +35,9 @@ namespace SicopataSchool.NotesManagement.Persistence.Repositories
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public IQueryable<T> ListAll()
+        public async Task<IReadOnlyList<T>> ListAllAsync()
         {
-            return _context.Set<T>().AsQueryable<T>();
+            return await _context.Set<T>().ToListAsync();
         }
 
         public async Task UpdateAsync(T entity)

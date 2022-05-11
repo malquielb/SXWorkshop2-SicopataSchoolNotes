@@ -33,6 +33,7 @@ namespace SicopataSchool.NotesManagement.Application.Features.Notes.Commands.Cre
             var note = _mapper.Map<Note>(request);
 
             // TODO: assign student id
+            note.StudentId = 1;
             // TODO: manage note shared
             note.Created = DateTime.Now;
 

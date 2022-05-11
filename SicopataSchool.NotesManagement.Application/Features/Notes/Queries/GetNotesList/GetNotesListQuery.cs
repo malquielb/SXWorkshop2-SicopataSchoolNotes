@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetNotesList
 {
-    public class GetNotesListQuery : IRequest<IQueryable<ListNoteVm>>
+    public class GetNotesListQuery : IRequest<List<ListNoteVm>>
     {
     }
 }

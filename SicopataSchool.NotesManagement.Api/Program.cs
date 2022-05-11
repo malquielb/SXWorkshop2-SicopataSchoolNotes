@@ -1,13 +1,17 @@
+using Microsoft.AspNetCore.OData;
 using SicopataSchool.NotesManagement.Application;
 using SicopataSchool.NotesManagement.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddOData(options => options.Expand().Select().Count().SetMaxTop(25).Filter().OrderBy());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

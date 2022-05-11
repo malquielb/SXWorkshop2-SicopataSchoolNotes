@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SicopataSchool.NotesManagement.Application.Contracts.Persistence;
+using SicopataSchool.NotesManagement.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,8 @@ namespace SicopataSchool.NotesManagement.Persistence
         {
             services.AddDbContext<SicopataSchoolDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("SicopataSchoolConnectionString")));
+            
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         }
     }
 }

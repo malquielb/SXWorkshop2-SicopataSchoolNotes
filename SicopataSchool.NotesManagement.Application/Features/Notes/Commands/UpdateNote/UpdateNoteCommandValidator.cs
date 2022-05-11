@@ -21,7 +21,7 @@ namespace SicopataSchool.NotesManagement.Application.Features.Notes.Commands.Upd
                 .MaximumLength(250);
 
             RuleFor(p => p.IsPublic)
-                .NotEmpty();
+                .NotNull();
         }
     }
 }

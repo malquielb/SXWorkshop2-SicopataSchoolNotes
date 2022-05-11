@@ -8,7 +8,7 @@ namespace SicopataSchool.NotesManagement.Application.Contracts.Persistence
 {
     public interface IBaseRepository<T> where T : class
     {
-        IQueryable<T> ListAll();
+        Task<IReadOnlyList<T>> ListAllAsync();
         Task<T> GetByIdAsync(int id);
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);

@@ -32,6 +32,8 @@ namespace SicopataSchool.NotesManagement.Application.Features.Notes.Commands.Upd
 
             var noteToUpdate = await _baseRepository.GetByIdAsync(request.Id);
             _mapper.Map(request, noteToUpdate, typeof(UpdateNoteCommand), typeof(Note));
+            await _baseRepository.UpdateAsync(noteToUpdate);
+
             return Unit.Value;
         }
     }

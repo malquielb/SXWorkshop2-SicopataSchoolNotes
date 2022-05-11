@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetNotesList
 {
-    public class GetNotesListQueryHandler : IRequestHandler<GetNotesListQuery, IQueryable<ListNoteVm>>
+    public class GetNotesListQueryHandler : IRequestHandler<GetNotesListQuery, List<ListNoteVm>>
     {
         private readonly IBaseRepository<Note> _baseRepository;
         private readonly IMapper _mapper;
@@ -21,10 +21,10 @@ namespace SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetN
             _mapper = mapper;
         }
 
-        public Task<IQueryable<ListNoteVm>> Handle(GetNotesListQuery request, CancellationToken cancellationToken)
+        public async Task<List<ListNoteVm>> Handle(GetNotesListQuery request, CancellationToken cancellationToken)
         {
-            var notesList = _baseRepository.ListAll();
-            return Task.FromResult(_mapper.Map<IQueryable<ListNoteVm>>(notesList));
+            var notesList = await _baseRepository.ListAllAsync();
+            return _mapper.Map<List<ListNoteVm>>(notesList);
         }
     }
 }
