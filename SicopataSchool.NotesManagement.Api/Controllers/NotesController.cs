@@ -9,6 +9,7 @@ using SicopataSchool.NotesManagement.Application.Features.Notes.Commands.UpdateN
 using SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetNoteDetails;
 using SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetNotesList;
 using SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetPublicNotes;
+using SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetSharedNotes;
 
 namespace SicopataSchool.NotesManagement.Api.Controllers
 {
@@ -47,6 +48,16 @@ namespace SicopataSchool.NotesManagement.Api.Controllers
         public async Task<ActionResult<List<PublicNoteVm>>> GetPublicNotes()
         {
             var response = await _mediator.Send(new GetPublicNotesQuery());
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("shared")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [EnableQuery(PageSize = 25)]
+        public async Task<ActionResult<List<SharedNoteVm>>> GetSharedNotes()
+        {
+            var response = await _mediator.Send(new GetSharedNotesQuery());
             return Ok(response);
         }
 

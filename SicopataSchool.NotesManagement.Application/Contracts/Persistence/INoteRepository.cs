@@ -10,5 +10,6 @@ namespace SicopataSchool.NotesManagement.Application.Contracts.Persistence
     public interface INoteRepository : IBaseRepository<Note>
     {
         Task<List<Note>> GetPublicNotes();
+        Task<List<Note>> GetSharedNotes();
     }
 }

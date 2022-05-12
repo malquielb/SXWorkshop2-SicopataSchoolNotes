@@ -20,5 +20,11 @@ namespace SicopataSchool.NotesManagement.Persistence.Repositories
             return await _context.Notes.Where(note => note.IsPublic)
                                             .ToListAsync();
         }
+
+        public async Task<List<Note>> GetSharedNotes()
+        {
+            return await _context.Notes.Where(note => note.Shared)
+                                            .ToListAsync();
+        }
     }
 }
