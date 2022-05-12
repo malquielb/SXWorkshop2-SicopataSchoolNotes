@@ -32,9 +32,8 @@ namespace SicopataSchool.NotesManagement.Application.Features.Notes.Commands.Cre
 
             var note = _mapper.Map<Note>(request);
 
-            // TODO: assign student id
-            note.StudentId = 1;
-            // TODO: manage note shared
+            note.StudentId = 1; // TODO: assign current userId
+            note.Shared = false;
             note.Created = DateTime.Now;
 
             var response = await _baseRepository.AddAsync(note);

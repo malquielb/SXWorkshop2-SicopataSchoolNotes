@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using SicopataSchool.NotesManagement.Application.Features.Notes.Commands.CreateNote;
 using SicopataSchool.NotesManagement.Application.Features.Notes.Commands.DeleteNote;
+using SicopataSchool.NotesManagement.Application.Features.Notes.Commands.ShareNote;
 using SicopataSchool.NotesManagement.Application.Features.Notes.Commands.UpdateNote;
 using SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetNoteDetails;
 using SicopataSchool.NotesManagement.Application.Features.Notes.Queries.GetNotesList;
@@ -55,6 +56,15 @@ namespace SicopataSchool.NotesManagement.Api.Controllers
         {
             var response = await _mediator.Send(createNote);
             return StatusCode(StatusCodes.Status201Created, response);
+        }
+
+        [HttpPost()]
+        [Route("share")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public async Task<ActionResult> ShareNote(int noteId, int studentId)
+        {
+            await _mediator.Send(new ShareNoteCommand { NoteId = noteId, StudentId = studentId });
+            return NoContent();
         }
 
         [HttpPut]

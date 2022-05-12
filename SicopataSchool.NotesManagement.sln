@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SicopataSchool.NotesManagem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SicopataSchool.NotesManagement.Application", "SicopataSchool.NotesManagement.Application\SicopataSchool.NotesManagement.Application.csproj", "{6BB63FAA-0F62-4F1E-931B-21884A34A4D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SicopataSchool.NotesManagement.Api", "SicopataSchool.NotesManagement.Api\SicopataSchool.NotesManagement.Api.csproj", "{230CFCBB-52D8-4EF0-8122-682B91E306EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SicopataSchool.NotesManagement.Api", "SicopataSchool.NotesManagement.Api\SicopataSchool.NotesManagement.Api.csproj", "{230CFCBB-52D8-4EF0-8122-682B91E306EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
